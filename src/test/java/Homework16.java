@@ -8,10 +8,12 @@ import org.testng.annotations.Test;
 
 import java.time.Duration;
 
-public class Homework16 {
+public class Homework16 extends BaseTest {
     @Test
-    public void registrationNavigation() {
-        WebDriver driver = new ChromeDriver();
+    public void registrationNavigation() throws InterruptedException {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        WebDriver driver = new ChromeDriver(options);
         // Using selenium, navigate to "https://qa.koel.app/"
     String homeUrl = "https://qa.koel.app/";
     driver.get(homeUrl);
@@ -20,7 +22,7 @@ public class Homework16 {
     registrationLink.click();
     // Add a pause
         // commenting out because this doesn't work:
-        // Thread.sleep(2000);
+        Thread.sleep(2000);
         // Verify that you are redirected to Registration page using Assert method
         String registrationUrl = "https://qa.koel.app/registration";
        String currentURL = driver.getCurrentUrl();
