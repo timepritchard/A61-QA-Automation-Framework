@@ -1,54 +1,47 @@
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import org.openqa.selenium.WebElement;
 
-import java.time.Duration;
-
-// can you please help?! When I run it I see it has searched for sailing day, but no results appear
-// I tried to add a click in case it needed a click, and implicit waits in case it needed to wait for the results to load
-// but none of this worked!
-// Also, I'm confused, I'm using the same css locator twice: "button[type='submit']" and when I search it shows there aren't other locators with the same name, is this because they are on different pages so they can be repeated?
-// Also, I know I should move the methods to BaseTest, but I want to get the test case working before I move them there!
 
 public class Homework17 extends BaseTest {
    @Test
-   public void addSongToPlaylist() {
+   public void addSongToPlaylist() throws InterruptedException {
+       String playlistName = "Tim";
+       String expectedSongAddedMessage = "Added 1 song into \"" + playlistName + ".\"";
        navigateToPage();
        // 5. Login with your credentials
        inputEmail("timothy.pritchard@testpro.io");
        inputPassword("q9RQ8fbN");
        submitLogin();
+       Thread.sleep(1000);
        // 6. Search for a song
-       songSearch("sailing day");
+       songSearch("there will");
        // 7. Click 'View All' button
        clickAll();
        // 8. click the first song in the search results
        firstSong();
+       Thread.sleep(1000);
        // 9. Click 'Add to' button
+       Thread.sleep(1000);
        addToButton();
+       Thread.sleep(1000);
        // 10. Choose the playlist to add it to
-       addToPlaylist("Tim's first playlist");
+       addToPlaylist("Tim");
+       Thread.sleep(1000);
        // Assert the playlist has been created
-       assertPlaylist();
+       Assert.assertEquals(getAddToPlaylistSuccessMsg(), expectedSongAddedMessage);
 
    }
 
-    public void assertPlaylist() {
-        WebElement notificationText = driver.findElement(By.cssSelector("class['alertify-logs top right']"));
-        String actualNotificationText = notificationText.getText();
-        String expectedNotificationText = "Created Playlist (playlistName)";
-        Assert.assertEquals(actualNotificationText, expectedNotificationText);
+    public String getAddToPlaylistSuccessMsg() {
+        WebElement notification = driver.findElement(By.cssSelector("div.success.show"));
+        return notification.getText();
     }
 
     public void addToPlaylist(String playlistName) {
-        WebElement createPlaylist = driver.findElement(By.cssSelector("input[data-test='new-playlist-name']"));
-        createPlaylist.sendKeys(playlistName);
-        WebElement submitPlaylist = driver.findElement(By.cssSelector("button[type='submit']"));
-        submitPlaylist.click();
+        WebElement playlist = driver.findElement(By.xpath("//*[@id='songResultsWrapper']//*[contains(text(), '" + playlistName + "')]"));
+        playlist.click();
     }
 
     public void addToButton() {
@@ -57,43 +50,19 @@ public class Homework17 extends BaseTest {
     }
 
     public void firstSong() {
-        WebElement selectSong = driver.findElement(By.cssSelector("tr[class='song-item selected']"));
+        WebElement selectSong = driver.findElement(By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]"));
         selectSong.click();
     }
 
     public void clickAll() {
         WebElement viewAll = driver.findElement(By.cssSelector("button[data-test='view-all-songs-btn']"));
         viewAll.click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
     public void songSearch(String songName) {
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
        WebElement songSearch = driver.findElement(By.cssSelector("input[name='q']"));
         songSearch.sendKeys(songName);
         songSearch.click();
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
     }
 
-    public void submitLogin() {
-        WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-        loginBtn.click();
-    }
-
-    public void inputPassword(String password) {
-        WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
-        passField.clear();
-        passField.sendKeys(password);
-    }
-
-    public void inputEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-
-    public void navigateToPage() {
-        String url = "https://qa.koel.app/";
-        driver.get(url);
-    }
 }

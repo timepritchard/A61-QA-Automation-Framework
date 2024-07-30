@@ -1,5 +1,7 @@
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.annotations.AfterMethod;
@@ -29,4 +31,26 @@ public class BaseTest {
         driver.quit();
 
 }
+
+    public void submitLogin() {
+        WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        loginBtn.click();
+    }
+
+    public void inputPassword(String password) {
+        WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
+        passField.clear();
+        passField.sendKeys(password);
+    }
+
+    public void inputEmail(String email) {
+        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.clear();
+        emailField.sendKeys(email);
+    }
+
+    public void navigateToPage() {
+        String url = "https://qa.koel.app/";
+        driver.get(url);
+    }
 }
