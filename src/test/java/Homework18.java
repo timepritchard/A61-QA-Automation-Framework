@@ -1,5 +1,6 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 
@@ -13,15 +14,27 @@ public class Homework18 extends BaseTest{
         submitLogin();
         allSongs();
         Thread.sleep(2000);
+        selectSong();
+        Thread.sleep(2000);
         playNextSong();
         Thread.sleep(5000);
-WebElement pauseButton = driver.findElement(By.cssSelector("span[title=\"Pause\"]"));
-Assert.assertTrue(pauseButton.isDisplayed());
+        Assert.assertTrue(isDisplayedPlayingSong());
+    }
+        public boolean isDisplayedPlayingSong() {
+            WebElement songIsPlaying = driver.findElement(By.cssSelector("[data-testid = 'sound-bar-play']"));
+            return songIsPlaying.isDisplayed();
+        }
+
+
+    public void selectSong() {
+        WebElement song = driver.findElement(By.cssSelector("tr.song-item"));
+        song.click();
     }
 
     public void playNextSong() {
     WebElement nextSong = driver.findElement(By.cssSelector("span[title=\"Play or resume\"]"));
-    nextSong.click();
+        Actions actions = new Actions(driver);
+        actions.click(nextSong).perform();
     }
 
     public void allSongs() {

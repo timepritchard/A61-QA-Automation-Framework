@@ -5,9 +5,11 @@
 
     <test name="testHomework18" preserve-order="false">
         <classes>
-            <methods>
-                <include name="playSong"/>
-            </methods>
+            <class name="Homework18">
+                    <methods>
+                        <include name="playSong"/>
+                    </methods>
+            </class>
         </classes>
     </test>
 </suite>
