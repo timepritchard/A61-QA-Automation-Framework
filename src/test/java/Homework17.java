@@ -16,7 +16,7 @@ public class Homework17 extends BaseTest {
        submitLogin();
        Thread.sleep(1000);
        // 6. Search for a song
-       songSearch("there will");
+       songSearch("pluto");
        // 7. Click 'View All' button
        clickAll();
        // 8. click the first song in the search results
