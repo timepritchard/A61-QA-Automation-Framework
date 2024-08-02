@@ -29,7 +29,7 @@ public class BaseTest {
         driver = new ChromeDriver(options);
         driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
-        url = BaseURL;
+        driver.get(BaseURL);
     }
 @AfterMethod
     public void closeBrowser(){
@@ -54,8 +54,8 @@ public class BaseTest {
         emailField.sendKeys(email);
     }
 
-    public void navigateToPage() {
+   /* no longer needed: public void navigateToPage() {
         //String url = "https://qa.koel.app/";
         driver.get(url);
-    }
+    } */
 }

@@ -8,16 +8,21 @@ public class Homework19 extends BaseTest{
     public void deletePlaylist() throws InterruptedException {
         String expectedDeletePlaylistNotification = "Deleted playlist";
 
-        navigateToPage();
+        // removing because it is no longer necessary navigateToPage();
         inputEmail("timothy.pritchard@testpro.io");
         inputPassword("q9RQ8fbN");
         submitLogin();
         Thread.sleep(2000);
         clickPlaylist();
         deleteSelectedPlaylist();
-        Assert.assertEquals(deletePlaylistNotification(), expectedDeletePlaylistNotification);
+        Assert.assertEquals(getPlaylistNotification(), expectedDeletePlaylistNotification);
 
 
+    }
+
+    public String getPlaylistNotification() {
+        WebElement notification = driver.findElement(By.xpath("//div[@class='success show' and contains(text(), 'Deleted playlist')]"));
+        return notification.getText();
     }
 
     /* Only necessary if the playlist has a song in
@@ -34,7 +39,7 @@ public class Homework19 extends BaseTest{
 
     public void deleteSelectedPlaylist() {
         WebElement deletePlaylistButton = driver.findElement(By.xpath("//button[@class='del btn-delete-playlist']"));
-
+deletePlaylistButton.click();
     }
 
     public void clickPlaylist() {
