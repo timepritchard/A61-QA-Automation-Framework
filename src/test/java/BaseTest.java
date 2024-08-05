@@ -24,6 +24,7 @@ public class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications","--remote-allow-origins=*", "--incognito","--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+        options.addArguments("--disable-search-engine-choice-screen");
 
 
         driver = new ChromeDriver(options);

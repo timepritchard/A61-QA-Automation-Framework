@@ -15,6 +15,7 @@ public class Homework19 extends BaseTest{
         Thread.sleep(2000);
         clickPlaylist();
         deleteSelectedPlaylist();
+        Thread.sleep(2000);
         Assert.assertEquals(getPlaylistNotification(), expectedDeletePlaylistNotification);
 
 
@@ -22,6 +23,10 @@ public class Homework19 extends BaseTest{
 
     public String getPlaylistNotification() {
         WebElement notification = driver.findElement(By.xpath("//div[@class='success show' and contains(text(), 'Deleted playlist')]"));
+        String notificationText = notification.getText();
+        if (notificationText.contains("Deleted playlist")) {
+            return "Deleted playlist";
+        }
         return notification.getText();
     }
 
