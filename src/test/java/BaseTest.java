@@ -4,6 +4,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
@@ -13,6 +15,7 @@ import java.time.Duration;
 
 public class BaseTest {
     public WebDriver driver = null;
+    WebDriverWait wait;
 
     @BeforeSuite
     public void setupClass() {
@@ -28,8 +31,9 @@ public class BaseTest {
 
 
         driver = new ChromeDriver(options);
-        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver.manage().window().maximize();
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         driver.get(BaseURL);
     }
 @AfterMethod
@@ -39,12 +43,16 @@ public class BaseTest {
 }
 
     public void submitLogin() {
-        WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        //WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("button[type='submit']")));
         loginBtn.click();
     }
 
     public void inputPassword(String password) {
-        WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
+        //WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement passField = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("input[type='password']")));
         passField.clear();
         passField.sendKeys(password);
     }
