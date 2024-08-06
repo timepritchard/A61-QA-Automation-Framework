@@ -1,5 +1,4 @@
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
+import org.openqa.selenium.*;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
@@ -15,17 +14,29 @@ public class Homework18 extends BaseTest{
         submitLogin();
         allSongs();
         selectSong();
-        playNextSong();
+        //playNextSong();
         clickPlay();
         Assert.assertTrue(isDisplayedPlayingSong());
     }
 
-    public void clickPlay() {
+    /*public void clickPlay() {
         //WebElement playButton = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
         WebElement playButton = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("span[data-testid='play-btn']")));
         playButton.click();
+    } */
+    public void clickPlay() {
+        WebElement playButton = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
+        Actions actions = new Actions(driver);
+        try {
+            actions.moveToElement(playButton).perform();
+            actions.click().build().perform();
+        } catch (TimeoutException e) {
+            System.out.println("Standard click failed, trying JavaScript click");
+            ((JavascriptExecutor) driver).executeScript("arguments[0].click();", playButton);
+        }
     }
+
 
     public void playNextSong() {
         //WebElement nextSong = driver.findElement(By.cssSelector("i[data-testid='play-next-btn']"));
