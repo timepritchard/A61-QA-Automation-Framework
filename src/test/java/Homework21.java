@@ -45,9 +45,9 @@ public String notificationText(){
     }
 
     public void clearPlaylist() {
-        WebElement playlistClear = wait.until(ExpectedConditions.visibilityOfElementLocated
+WebElement playlistClear = wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.xpath("[@name='name']")));
-        playlistClear.sendKeys(Keys.chord(Keys.CONTROL, "A", Keys.BACK_SPACE));
+        playlistClear.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE));
     }
 
     public void selectPlaylist() {
