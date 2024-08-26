@@ -7,12 +7,14 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 public class Homework21 extends BaseTest{
+
+    String newPlaylistName = "Sample Edited Playlist";
     @Test
     public void renamePlaylist(){
         //define the new playlist name
-        String newPlaylistName = "new name";
+
         //define the expected notification message of the new playlist
-        String expectedMessage = "Updated playlist" +newPlaylistName +".";
+        String expectedMessage = "Updated playlist \"Sample Edited Playlist.\"";
         //Login
         inputEmail("timothy.pritchard@testpro.io");
         inputPassword("q9RQ8fbN");
@@ -38,16 +40,16 @@ public String notificationText(){
 
     public void inputNewName() {
         WebElement newName = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("[@name='name']")));
-        newName.sendKeys("newPlaylistName");
+                (By.cssSelector("[name='name']")));
+        newName.sendKeys(newPlaylistName);
         newName.sendKeys(Keys.ENTER);
 
     }
 
     public void clearPlaylist() {
 WebElement playlistClear = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.xpath("[@name='name']")));
-        playlistClear.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.BACK_SPACE));
+        (By.cssSelector("[name='name']")));
+        playlistClear.sendKeys(Keys.chord(Keys.COMMAND, "a", Keys.DELETE));
     }
 
     public void selectPlaylist() {
