@@ -3,6 +3,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.HomePage;
+import pages.LoginPage;
 
 import java.time.Duration;
 
@@ -21,5 +23,18 @@ public class LoginTests extends BaseTest {
         driver.get(url);
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
+    }
+    @Test
+    public void positiveLoginTest(){
+        //Objects
+        LoginPage loginPage = new LoginPage(driver);
+        HomePage homePage = new HomePage(driver);
+        //Steps
+        loginPage.provideEmail("timothy.pritchard@testpro.io");
+        loginPage.providePassword("q9RQ8fbN");
+        loginPage.clickSubmit();
+        //Expected versus Actual
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+
     }
 }
