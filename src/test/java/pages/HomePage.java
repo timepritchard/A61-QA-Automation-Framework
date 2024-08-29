@@ -16,7 +16,8 @@ By userAvatarIcon = By.cssSelector("img.avatar");
 By notificationBox = By.cssSelector("div.success.show");
 By playlistName = By.cssSelector("[name='name']");
 By secondPlaylistList = By.xpath("(//li[@class='playlist playlist'])[2]");
-    String newPlaylistName = "Sample Edited Playlist";
+By allSongsTab = By.cssSelector("li a.songs");
+String newPlaylistName = "Sample Edited Playlist";
 
     // Helper methods
 public WebElement getUserAvatar(){
@@ -33,14 +34,14 @@ public void inputNewName() {
 
 public void clearPlaylist() {
     findElement(playlistName).sendKeys(Keys.COMMAND, "a", Keys.DELETE);
-
-    }
+}
 
     public void selectPlaylist() {
         WebElement secondPlaylist = findElement(secondPlaylistList);
         Actions actions = new Actions(driver);
         actions.doubleClick(secondPlaylist).perform();
-
-
+}
+    public void allSongs() {
+        findElement(allSongsTab).click();
     }
 }
