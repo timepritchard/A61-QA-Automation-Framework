@@ -12,9 +12,15 @@ public class HomePageFactory extends BasePage {
     // Page factory elements
     @FindBy(xpath = "(//li[@class='playlist playlist'])[2]")
     WebElement playlist;
+    @FindBy(css = "a .avatar")
+    WebElement profileAvatar;
 
     // Helper methods
     public void clickPlaylist(){
         waitForElement(playlist).click();
+    }
+    public void clickProfile(){
+        waitForElement(profileAvatar).click();
+
     }
 }

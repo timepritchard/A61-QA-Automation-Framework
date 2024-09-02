@@ -3,11 +3,14 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageFactory.HomePageFactory;
 import pageFactory.LoginPageFactory;
 import pages.HomePage;
 import pages.LoginPage;
 
 import java.time.Duration;
+
+import static java.sql.DriverManager.getDriver;
 
 public class LoginTests extends BaseTest {
    /* @Test
@@ -28,9 +31,10 @@ public class LoginTests extends BaseTest {
     @Test
     public void positiveLoginTest(){
         //Objects
-        LoginPage loginPage = new LoginPage(driver);
-        LoginPageFactory loginPageFactory = new LoginPageFactory(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getDriver());
+        LoginPageFactory loginPageFactory = new LoginPageFactory(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+        HomePageFactory homePageFactory = new HomePageFactory(getDriver());
         //Steps
         loginPage.provideEmail("timothy.pritchard@testpro.io");
         loginPage.providePassword("q9RQ8fbN");
