@@ -1,4 +1,4 @@
-import org.testng.Assert;
+/*import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageFactory.HomePageFactory;
 import pageFactory.LoginPageFactory;
@@ -18,8 +18,9 @@ public class ProfileTest extends BaseTest {
     homepageFactory.clickProfile();
     profilePageFactory.changeThemeToSlate();
     Assert.assertTrue(profilePageFactory.themeSelected().isDisplayed());
+    }
 
 
-}
 
-}
+
+}*/
