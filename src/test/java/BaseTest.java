@@ -26,16 +26,17 @@ import java.util.HashMap;
 import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
-    public static WebDriver driver = null;
-    WebDriverWait wait;
-    Actions actions;
+    public WebDriver driver = null;
+    public String url = null;
+    public static WebDriverWait wait = null;
+    public static Actions actions = null;
 
     private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
 
-    @BeforeSuite
-    public void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
+    //@BeforeSuite
+    //public void setupClass() {
+    //WebDriverManager.chromedriver().setup();
+    //}
 
     //static void setupClass(){
     //WebDriverManager.firefoxdriver().setup();
@@ -45,11 +46,19 @@ public class BaseTest {
     public void setBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(pickBrowser(System.getProperty("browser")));
         getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(driver, Duration.ofSeconds(10));
-        navigateToPage(BaseURL);
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+        url = BaseURL;
+        navigateToPage();
     }
 
-    public void launchBrowser(String BaseURL) throws MalformedURLException {
+    public void navigateToPage() {
+        getDriver().get(url);
+    }
+
+    public static WebDriver getDriver() {
+        return threadDriver.get();
+    }
+    /*public void launchBrowser(String BaseURL) throws MalformedURLException {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
         options.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
@@ -60,11 +69,11 @@ public class BaseTest {
         //driver = new FirefoxDriver();
         //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
         driver = pickBrowser(System.getProperty("browser"));
-        driver.manage().window().maximize();
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        driver.get(BaseURL);
-    }
+        driver.manage().window().maximize();*/
+    //wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    //actions = new Actions(driver);
+    //driver.get(BaseURL);
+    //}*/
 
     @AfterMethod
     public void tearDown() {
@@ -72,35 +81,21 @@ public class BaseTest {
         threadDriver.remove();
     }
 
-    public void closeBrowser() {
-        driver.quit();
-
+    public WebDriver lambdaTest() throws MalformedURLException {
+        String hubUrl = "https://hub.lambdatest.com/wd/hub";
+        ChromeOptions browserOptions = new ChromeOptions();
+        browserOptions.setPlatformName("Windows 10");
+        browserOptions.setBrowserVersion("127");
+        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
+        ltOptions.put("username", "timepritchard");
+        ltOptions.put("accessKey", "VObn8lamYSKa3gghKWtRwhjqxyw3MPMy6dt86tSFOGpgpoRYPw");
+        ltOptions.put("project", "Untitled");
+        ltOptions.put("selenium_version", "4.0.0");
+        ltOptions.put("w3c", true);
+        browserOptions.setCapability("LT:Options", ltOptions);
+        return new RemoteWebDriver(new URL(hubUrl), browserOptions);
     }
 
-    public void submitLogin() {
-        //WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
-        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("button[type='submit']")));
-        loginBtn.click();
-    }
-
-    public void inputPassword(String password) {
-        //WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
-        WebElement passField = wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='password']")));
-        passField.clear();
-        passField.sendKeys(password);
-    }
-
-    public void inputEmail(String email) {
-        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-
-    public static WebDriver detDriver() {
-        return threadDriver.get();
-    }
 
     public WebDriver pickBrowser(String browserName) throws MalformedURLException {
 
@@ -138,24 +133,32 @@ public class BaseTest {
         }
     }
 
-    public WebDriver lambdaTest() throws MalformedURLException {
-        String hubUrl = "https://hub.lambdatest.com/wd/hub";
-        ChromeOptions browserOptions = new ChromeOptions();
-        browserOptions.setPlatformName("Windows 10");
-        browserOptions.setBrowserVersion("127");
-        HashMap<String, Object> ltOptions = new HashMap<String, Object>();
-        ltOptions.put("username", "timepritchard");
-        ltOptions.put("accessKey", "VObn8lamYSKa3gghKWtRwhjqxyw3MPMy6dt86tSFOGpgpoRYPw");
-        ltOptions.put("project", "Untitled");
-        ltOptions.put("selenium_version", "4.0.0");
-        ltOptions.put("w3c", true);
-        browserOptions.setCapability("LT:Options", ltOptions);
-        return new RemoteWebDriver(new URL(hubUrl), browserOptions);
+    public void closeBrowser() {
+        driver.quit();
+
+    }
+
+    public void submitLogin() {
+        //WebElement loginBtn = driver.findElement(By.cssSelector("button[type='submit']"));
+        WebElement loginBtn = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("button[type='submit']")));
+        loginBtn.click();
+    }
+
+    public void inputPassword(String password) {
+        //WebElement passField = driver.findElement(By.cssSelector("input[type='password']"));
+        WebElement passField = wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("input[type='password']")));
+        passField.clear();
+        passField.sendKeys(password);
+    }
+
+    public void inputEmail(String email) {
+        WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
+        emailField.clear();
+        emailField.sendKeys(email);
     }
 }
 
-    public void navigateToPage(String url) {
-        String url = "https://qa.koel.app/";
-        getDriver().get(url);
-    }
+
 

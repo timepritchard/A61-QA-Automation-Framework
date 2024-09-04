@@ -43,4 +43,15 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
 
     }
+@Test
+    public void loginInvalidEmailValidPassword() throws InterruptedException{
+        String expectedUrl = "https://qa.koel.app/";
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homepage = new HomePage(getDriver());
+        loginPage.provideEmail("invalid@testpro.io");
+        loginPage.providePassword("te$tStudent");
+        loginPage.clickSubmit();
+        Assert.assertEquals(getDriver().getCurrentUrl(), expectedUrl);
+
+}
 }
