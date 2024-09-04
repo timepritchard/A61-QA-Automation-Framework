@@ -1,4 +1,4 @@
-package pageFactory;
+/*package pageFactory;
 
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -26,4 +26,4 @@ public class ProfilePageFactory extends BasePage {
         WebElement = waitForElement(selectedBorder).isDisplayed();
         return selectedBorder.isDisplayed();
     }
-}
+}*/

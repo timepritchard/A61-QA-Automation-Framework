@@ -23,7 +23,7 @@ import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 
-import static java.sql.DriverManager.getDriver;
+//import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
     public WebDriver driver = null;
@@ -46,13 +46,12 @@ public class BaseTest {
     public void setBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(pickBrowser(System.getProperty("browser")));
         getDriver().manage().window().maximize();
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        url = BaseURL;
-        navigateToPage();
+        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Removed 'driver' argument
+        navigateToPage(BaseURL);
     }
 
-    public void navigateToPage() {
-        getDriver().get(url);
+    public void navigateToPage(String url) {
+        getDriver().get(url); // Use the method parameter 'url'
     }
 
     public static WebDriver getDriver() {
