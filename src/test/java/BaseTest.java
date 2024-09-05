@@ -46,6 +46,9 @@ public class BaseTest {
     public void setBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(pickBrowser(System.getProperty("browser")));
         getDriver().manage().window().maximize();
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+        options.addArguments("--disable-search-engine-choice-screen");
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10)); // Removed 'driver' argument
         navigateToPage(BaseURL);
     }
