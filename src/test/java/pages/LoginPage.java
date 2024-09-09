@@ -12,6 +12,7 @@ public class LoginPage extends BasePage{
     By emailField = By.cssSelector("input[type='email']");
     By passwordField = By.cssSelector("input[type='password']");
     By submitButton = By.cssSelector("button[type='submit']");
+    By avatar = By.cssSelector("img.avatar");
 
     //Helper methods
     public void provideEmail(String email){
