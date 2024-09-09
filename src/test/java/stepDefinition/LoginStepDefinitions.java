@@ -14,14 +14,22 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-//import pages.BasePage;
+import pages.BasePage;
+import pages.HomePage;
+import pages.LoginPage;
 //import pages.LoginPage;
 
 import java.time.Duration;
 
-public class LoginStepDefinitions {
+import static java.sql.DriverManager.getDriver;
+
+public class LoginStepDefinitions extends BasePage {
     WebDriver driver;
     WebDriverWait wait;
+
+    public LoginStepDefinitions(WebDriver givenDriver) {
+        super(givenDriver);
+    }
 
 
     //@Given("I have browser open")
@@ -47,35 +55,37 @@ public class LoginStepDefinitions {
 
     @When("I enter email {string}")
     public void iEnterEmail(String email) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='email']"))).sendKeys(email);
-        /*LoginPage loginPage = new LoginPage(driver);
-        loginPage.provideEmail(email);*/
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("input[type='email']"))).sendKeys(email);*/
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.provideEmail(email);
 
     }
 
 
     @And("I enter Password {string}")
     public void iEnterPassword(String password) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='password']"))).sendKeys(password);
-        /*LoginPage loginPage = new LoginPage(driver);
-        loginPage.providePassword(password);*/
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("input[type='password']"))).sendKeys(password);*/
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.providePassword(password);
     }
 
 
     @And("I submit")
     public void iSubmit() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("button[type='submit']"))).click();
-        /*LoginPage loginPage = new LoginPage(driver);
-        loginPage.clickSubmit();*/
+        /*wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("button[type='submit']"))).click();*/
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.clickSubmit();
     }
 
 
     @Then("I am logged in")
     public void iAmLoggedIn() {
-        Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("img.avatar"))).isDisplayed());
+        /*Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated
+                (By.cssSelector("img.avatar"))).isDisplayed());*/
+        HomePage homePage = new HomePage(driver);
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 }

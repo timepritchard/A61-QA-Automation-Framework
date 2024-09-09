@@ -8,14 +8,9 @@
         <classes>
             <class name="LoginTests"/>
             <class name="CucumberRunner"/>
-            <!--<class name="BaseTest"/>
-            <class name="Homework17"/>
-            <class name="Homework18"/>
-            <class name="Homework19"/>
-            <class name="Homework21"/>
             <class name="HomePageTest"/>
             <class name="AllSongsTest"/>
-            <class name="PlaylistTests"/> -->
+            <class name="PlaylistTests"/>
         </classes>
     </test>
 </suite>
