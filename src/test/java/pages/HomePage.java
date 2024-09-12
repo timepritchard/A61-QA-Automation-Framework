@@ -23,6 +23,7 @@ public class HomePage extends BasePage {
     By selectSong = By.xpath("//section[@id='songResultsWrapper']//tr[@class='song-item'][1]");
     By addToBtn = By.cssSelector("button[class='btn-add-to']");
     By playlist = By.xpath("//*[@id='songResultsWrapper']//*[contains(text(), '" + nameOfPlaylist + "')]");
+    By currentQueue = By.cssSelector(".queue.active");
     String newPlaylistName = "Sample Edited Playlist";
 
 
@@ -67,4 +68,9 @@ public class HomePage extends BasePage {
     public void addToPlaylist(String nameOfPlaylist) {
         findElement(playlist).click();
     }
+    public void tapCurrentQueue(){
+        findElement(currentQueue).click();
+    }
+
 }
+

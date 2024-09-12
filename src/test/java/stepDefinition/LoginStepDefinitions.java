@@ -41,31 +41,22 @@ public class LoginStepDefinitions {
     public void closeBrowser(){
         driver.quit();
     }
-
     @Given("I open the login page")
     public void iOpenLoginPage() {
         driver.get("https://qa.koel.app/");
     }
-
-
     @When("I enter email {string}")
     public void iEnterEmail(String email) {
         loginPage.provideEmail(email);
-
     }
-
     @And("I enter password {string}")
     public void iEnterPassword(String password) {
         loginPage.providePassword(password);
     }
-
-
     @And("I submit")
     public void iSubmit() {
         loginPage.clickSubmit();
     }
-
-
     @Then("I am logged in")
     public void iAmLoggedIn() {
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
