@@ -14,23 +14,18 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
-import pages.BasePage;
 import pages.HomePage;
 import pages.LoginPage;
-//import pages.LoginPage;
 
 import java.time.Duration;
 
 import static java.sql.DriverManager.getDriver;
 
-public class LoginStepDefinitions extends BasePage {
+public class LoginStepDefinitions {
     WebDriver driver;
     WebDriverWait wait;
-
-    public LoginStepDefinitions(WebDriver givenDriver) {
-        super(givenDriver);
-    }
-
+    LoginPage loginPage;
+    HomePage homePage;
 
     //@Given("I have browser open")
     @Before
@@ -41,6 +36,9 @@ public class LoginStepDefinitions extends BasePage {
         options.addArguments("--disable-search-engine-choice-screen");
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        loginPage = new LoginPage(driver);
+        homePage = new HomePage(driver);
+
     }
     @After
     public void closeBrowser(){
@@ -57,17 +55,14 @@ public class LoginStepDefinitions extends BasePage {
     public void iEnterEmail(String email) {
         /*wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("input[type='email']"))).sendKeys(email);*/
-        LoginPage loginPage = new LoginPage(driver);
+        //LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail(email);
 
     }
 
-
-    @And("I enter Password {string}")
+    @And("I enter password {string}")
     public void iEnterPassword(String password) {
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='password']"))).sendKeys(password);*/
-        LoginPage loginPage = new LoginPage(driver);
+        //LoginPage loginPage = new LoginPage(driver);
         loginPage.providePassword(password);
     }
 
@@ -76,7 +71,7 @@ public class LoginStepDefinitions extends BasePage {
     public void iSubmit() {
         /*wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("button[type='submit']"))).click();*/
-        LoginPage loginPage = new LoginPage(driver);
+        //LoginPage loginPage = new LoginPage(driver);
         loginPage.clickSubmit();
     }
 
@@ -85,7 +80,8 @@ public class LoginStepDefinitions extends BasePage {
     public void iAmLoggedIn() {
         /*Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated
                 (By.cssSelector("img.avatar"))).isDisplayed());*/
-        HomePage homePage = new HomePage(driver);
+        //HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
+
 }
