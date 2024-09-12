@@ -19,15 +19,12 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-import static java.sql.DriverManager.getDriver;
-
 public class LoginStepDefinitions {
     WebDriver driver;
     WebDriverWait wait;
     LoginPage loginPage;
     HomePage homePage;
 
-    //@Given("I have browser open")
     @Before
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
@@ -53,34 +50,24 @@ public class LoginStepDefinitions {
 
     @When("I enter email {string}")
     public void iEnterEmail(String email) {
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("input[type='email']"))).sendKeys(email);*/
-        //LoginPage loginPage = new LoginPage(driver);
         loginPage.provideEmail(email);
 
     }
 
     @And("I enter password {string}")
     public void iEnterPassword(String password) {
-        //LoginPage loginPage = new LoginPage(driver);
         loginPage.providePassword(password);
     }
 
 
     @And("I submit")
     public void iSubmit() {
-        /*wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("button[type='submit']"))).click();*/
-        //LoginPage loginPage = new LoginPage(driver);
         loginPage.clickSubmit();
     }
 
 
     @Then("I am logged in")
     public void iAmLoggedIn() {
-        /*Assert.assertTrue(wait.until(ExpectedConditions.visibilityOfElementLocated
-                (By.cssSelector("img.avatar"))).isDisplayed());*/
-        //HomePage homePage = new HomePage(driver);
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
