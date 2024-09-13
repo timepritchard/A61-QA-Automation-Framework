@@ -6,11 +6,10 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
+import io.github.bonigarcia.wdm.WebDriverManager;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.HomePage;
@@ -18,55 +17,46 @@ import pages.LoginPage;
 
 import java.time.Duration;
 
-public class LoginStepDefinitions {
-    WebDriver driver = WebDriverManager.getDriver();
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
+import static org.testng.reporters.jq.BasePanel.I;
 
-
-
-
-
-    /*WebDriver driver;
+public class NewPlaylistDefinitions {
+    WebDriver driver;
     WebDriverWait wait;
     LoginPage loginPage;
     HomePage homePage;
 
-    @Before
+    /*@Before
     public void openBrowser() {
         WebDriverManager.chromedriver().setup();
         ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--start-maximized");
         options.addArguments("--disable-search-engine-choice-screen");
         driver = new ChromeDriver(options);
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         loginPage = new LoginPage(driver);
         homePage = new HomePage(driver);
 
-    }
+    }*/
     @After
     public void closeBrowser(){
         driver.quit();
-    }*/
-    @Given("I open the login page")
-    public void iOpenLoginPage() {
-        driver.get("https://qa.koel.app/");
     }
-    @When("I enter email {string}")
-    public void iEnterEmail(String email) {
-        loginPage.provideEmail(email);
+    @When("I tap to create a new playlist")
+    public void createNewPlaylist(){
+        homePage.plusBtnPlaylist();
     }
-    @And("I enter password {string}")
-    public void iEnterPassword(String password) {
-        loginPage.providePassword(password);
-    }
-    @And("I submit")
-    public void iSubmit() {
-        loginPage.clickSubmit();
-    }
-    @Then("I am logged in")
-    public void iAmLoggedIn() {
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    @And("I select new playlist")
+    public void iSelectNewPlaylist() {
+        homePage.addNewPlaylist();
     }
 
+    @And("I type {string}")
+    public void iType(String inputNewPlaylistName) {
+        homePage.typeNewName(inputNewPlaylistName);
+    }
+
+    @Then("I see the new playlist notification")
+    public void iSeeTheNewPlaylistNotification() {
+        Assert.assertTrue(homePage.playlistNotification());
+    }
 }

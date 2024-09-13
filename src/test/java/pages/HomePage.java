@@ -24,7 +24,10 @@ public class HomePage extends BasePage {
     By addToBtn = By.cssSelector("button[class='btn-add-to']");
     By playlist = By.xpath("//*[@id='songResultsWrapper']//*[contains(text(), '" + nameOfPlaylist + "')]");
     By currentQueue = By.cssSelector(".queue.active");
+    By addPlaylist = By.cssSelector("[title='Create a new playlist']");
+    By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
     String newPlaylistName = "Sample Edited Playlist";
+
 
 
     // Helper methods
@@ -70,6 +73,19 @@ public class HomePage extends BasePage {
     }
     public void tapCurrentQueue(){
         findElement(currentQueue).click();
+    }
+    public void plusBtnPlaylist(){
+        findElement(addPlaylist).click();
+    }
+    public void addNewPlaylist() {
+        findElement(newPlaylist).click();
+    }
+    public void typeNewName(String inputPlaylistName){
+        findElement(playlistName).sendKeys(inputPlaylistName);
+        findElement(playlistName).sendKeys(Keys.ENTER);
+    }
+    public boolean playlistNotification(){
+        return findElement(notificationBox).isDisplayed();
     }
 
 }
