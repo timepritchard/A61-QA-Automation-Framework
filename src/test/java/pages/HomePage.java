@@ -24,7 +24,7 @@ public class HomePage extends BasePage {
     By addToBtn = By.cssSelector("button[class='btn-add-to']");
     By playlist = By.xpath("//*[@id='songResultsWrapper']//*[contains(text(), '" + nameOfPlaylist + "')]");
     By currentQueue = By.cssSelector(".queue.active");
-    By addPlaylist = By.cssSelector("[title='Create a new playlist']");
+    By addPlaylist = By.cssSelector(".fa.fa-plus-circle.create");
     By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
     String newPlaylistName = "Sample Edited Playlist";
 

@@ -6,49 +6,33 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import pages.HomePage;
 import pages.LoginPage;
 
-import java.time.Duration;
-
 public class LoginStepDefinitions {
-    WebDriver driver = WebDriverManager.getDriver();
-    LoginPage loginPage = new LoginPage(driver);
-    HomePage homePage = new HomePage(driver);
+
+        WebDriver driver;
+        LoginPage loginPage;
+        HomePage homePage;
+
+        // This hook runs before each scenario
+        @Before
+        public void setUp() {
+            driver = WebDriverManager.getDriver();  // Initialize WebDriver from WebDriverManager
+            loginPage = new LoginPage(driver);      // Initialize page objects after driver is ready
+            homePage = new HomePage(driver);
+        }
+
+        // This hook runs after each scenario
+        @After
+        public void tearDown() {
+            WebDriverManager.closeDriver();  // Ensures driver is properly closed after tests
+        }
 
 
-
-
-
-    /*WebDriver driver;
-    WebDriverWait wait;
-    LoginPage loginPage;
-    HomePage homePage;
-
-    @Before
-    public void openBrowser() {
-        WebDriverManager.chromedriver().setup();
-        ChromeOptions options = new ChromeOptions();
-        options.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
-        options.addArguments("--disable-search-engine-choice-screen");
-        driver = new ChromeDriver(options);
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        loginPage = new LoginPage(driver);
-        homePage = new HomePage(driver);
-
-    }
-    @After
-    public void closeBrowser(){
-        driver.quit();
-    }*/
-    @Given("I open the login page")
+        @Given("I open the login page")
     public void iOpenLoginPage() {
         driver.get("https://qa.koel.app/");
     }

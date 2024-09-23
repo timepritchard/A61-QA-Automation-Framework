@@ -11,20 +11,24 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-    WebDriver driver;
-    WebDriverWait wait;
-    Actions actions;
+    protected WebDriver driver;
+    protected WebDriverWait wait;
+    protected Actions actions;
 
-    // declare the reference variables we will be using
-    public BasePage(WebDriver givenDriver){
-        driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        PageFactory.initElements(driver, this);
+    // Constructor to accept the WebDriver instance
+    public BasePage(WebDriver givenDriver) {
+        this.driver = givenDriver;
+        this.wait = new WebDriverWait(driver, Duration.ofSeconds(10)); // Setting wait time
+        this.actions = new Actions(driver); // For complex user actions
+        PageFactory.initElements(driver, this); // Initialize page elements
     }
 // create a method for the wait
     public WebElement findElement(By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+    }
+    // Generic method for clicking using Actions class
+    public void clickUsingActions(WebElement element) {
+        actions.moveToElement(element).click().build().perform();
     }
     // create a method for the @findby wait
     public WebElement waitForElement(WebElement element) {
