@@ -11,6 +11,9 @@ public class AllSongsPage extends BasePage {
         By PlayButton = By.cssSelector("span[data-testid='play-btn']");
         By firstSong = By.cssSelector("tr.song-item:nth-child(1)");
         By tapPlay = By.cssSelector("li.playback");
+    By heartSeventhSong = By.xpath("(//div[@class='song-list-wrap main-scroll-wrap all-songs']//i[contains(@class, 'fa fa-heart-o')])[1]");
+    By topSongName = By.xpath("(//section[@id='songsWrapper']//td[@class='title'])[1]");
+
 //constructor
         public AllSongsPage(WebDriver givenDriver) {
             super(givenDriver);
@@ -28,21 +31,14 @@ public class AllSongsPage extends BasePage {
             findElement(tapPlay).click();
         }
 
-        /*public void clickPlay () {
-            WebElement playBtn = findElement(PlayButton);
-            Actions actions = new Actions(driver);
-            try {
-                actions.moveToElement(playBtn).perform();
-                actions.click().build().perform();
-            } catch (TimeoutException e) {
-                System.out.println("Standard click failed, trying JavaScript click");
-                ((JavascriptExecutor) driver).executeScript("arguments[0].click();", playBtn);
-            }
-        }*/
         public boolean isSoundBarDisplayed () {
             return findElement(soundBar).isDisplayed();
         }
-
+        public void favoriteSong(String song){
+            // need to add the find element here to use the variable song in the method
+            By heartBtn = By.xpath("(//div[@class='song-list-wrap main-scroll-wrap all-songs'])//button[@data-test='like-btn' and contains(@title, 'Like " + song + "')]");
+            findElement(heartBtn).click();
+        }
     }
 
 

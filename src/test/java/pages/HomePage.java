@@ -26,6 +26,8 @@ public class HomePage extends BasePage {
     By currentQueue = By.cssSelector(".queue.active");
     By addPlaylist = By.cssSelector(".fa.fa-plus-circle.create");
     By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
+    By favorites = By.cssSelector("a[href='#!/favorites']");
+    By homePage = By.cssSelector("a.home[href='#!/home']");
     String newPlaylistName = "Sample Edited Playlist";
 
 
@@ -86,6 +88,13 @@ public class HomePage extends BasePage {
     }
     public boolean playlistNotification(){
         return findElement(notificationBox).isDisplayed();
+    }
+    public void favoriteList(){
+        findElement(favorites).click();
+    }
+
+    public void homePageTab(){
+        findElement(homePage).click();
     }
 
 }
