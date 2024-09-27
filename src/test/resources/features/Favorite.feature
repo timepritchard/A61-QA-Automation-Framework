@@ -1,4 +1,4 @@
-Feature: Create new playlist
+Feature: Favorite feature
 
   Background:
     Given I open the login page

@@ -28,6 +28,7 @@ public class HomePage extends BasePage {
     By newPlaylist = By.cssSelector("[data-testid='playlist-context-menu-create-simple']");
     By favorites = By.cssSelector("a[href='#!/favorites']");
     By homePage = By.cssSelector("a.home[href='#!/home']");
+    By albums = By.cssSelector("[href='#!/albums']");
     String newPlaylistName = "Sample Edited Playlist";
 
 
@@ -95,6 +96,9 @@ public class HomePage extends BasePage {
 
     public void homePageTab(){
         findElement(homePage).click();
+    }
+    public void albumsList(){
+        findElement(albums).click();
     }
 
 }

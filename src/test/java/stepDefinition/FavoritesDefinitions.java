@@ -20,7 +20,6 @@ public class FavoritesDefinitions {
     HomePage homePage;
     AllSongsPage allSongsPage;
     FavoritesPage favoritesPage;
-    private String firstSongTitle;
 
     @Before
     public void setUp() {
