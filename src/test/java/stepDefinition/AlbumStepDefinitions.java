@@ -30,11 +30,6 @@ public class AlbumStepDefinitions {
     @And("I tap Albums")
     public void iTapAlbums(){
         homePage.albumsList();
-        try {
-            Thread.sleep(3000); // Sleep for 2000 milliseconds (2 seconds)
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
     }
 
     @Then("all of them have cover photos")
