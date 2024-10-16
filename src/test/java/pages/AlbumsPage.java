@@ -36,7 +36,8 @@ public class AlbumsPage extends BasePage {
     public void tapOnAlbum(String album) {
         //By openAlbum = By.xpath("//div[@class='albums main-scroll-wrap as-list']//a[@class='name' and normalize-space(text())='" + album + "']");By openAlbum = By.xpath("//div[@class='albums main-scroll-wrap as-list']//article[@title='" + album + "']//a[@class='control control-play font-size-0']");
         //By openAlbum = By.xpath("//div[@class='albums main-scroll-wrap as-list']//article[contains(@title, '" + album + "')]//a[@class='control control-play font-size-0']");
-        By openAlbum = By.xpath("//div[@class='albums main-scroll-wrap as-list']//article[contains(@title, 'Airbit')]//a[text()='Airbit']");
+        //By openAlbum = By.xpath("//div[@class='albums main-scroll-wrap as-list']//article[contains(@title, 'Airbit')]//a[text()='Airbit']");
+        By openAlbum = By.xpath("//*[@id='albumsWrapper']//article//*[text()=\""+album+"\"]");
         findElement(openAlbum).click();
     }
 
