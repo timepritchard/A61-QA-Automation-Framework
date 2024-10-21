@@ -44,7 +44,7 @@ public class AlbumStepDefinitions {
     }
 
     @And("I open album {string}")
-    public void iOpenAlbum(String album) {
+    public void iOpenAlbum(String album) throws InterruptedException {
         albumsPage.tapOnAlbum(album);
 
     }

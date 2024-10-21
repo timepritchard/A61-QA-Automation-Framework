@@ -28,10 +28,15 @@ public class HomePage extends BasePage {
     By homePage = By.cssSelector("a.home[href='#!/home']");
     By albums = By.cssSelector("[href='#!/albums']");
     By albumContent = By.cssSelector(".albums.main-scroll-wrap.as-list");
+    By artists = By.xpath("//a[@href='#!/artists']");
     String newPlaylistName = "Sample Edited Playlist";
 
 
     // Helper methods
+    public void tapArtists(){
+        findElement(artists).click();
+    }
+
     public WebElement getUserAvatar() {
         return findElement(userAvatarIcon);
     }
@@ -130,7 +135,14 @@ public class HomePage extends BasePage {
             WebElement albumElement = wait.until(ExpectedConditions.elementToBeClickable(albums));
             albumElement.click();
         }
+        }
+        public void artistSearch() {
+            findElement(songSearch).click();
+        }
+        public void searchArtist(String artistName){
+            findElement(songSearch).click();
+            findElement(songSearch).sendKeys(artistName);
 
-    }
+        }
 }
 
